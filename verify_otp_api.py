@@ -54,7 +54,7 @@ def verify_otp(request:OTPRequest):
         exist = cursor.fetchone()
 
         if exist:
-            db.commit("""DELETE FROM email_otp WHERE email = %s""",(to_email,))
+            cursor.execute("""DELETE FROM email_otp WHERE email = %s""",(to_email,))
             db.commit()
             return{"status":"success","message":"otp verified"}
         else:
