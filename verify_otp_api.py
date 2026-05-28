@@ -62,7 +62,9 @@ def verify_otp(request:OTPRequest):
     except mysql.connector.Error as err:
         return {"message": "Database connection failed", "error": str(err)}
     finally:
-        cursor.close()
-        db.close()
+        if cursor:
+            cursor.close()
+        if db:
+            db.close()
     
     
